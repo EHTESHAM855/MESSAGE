@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Message Encryption and Decryption</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <h2>Message Encryption and Decryption</h2>
+    <div>
+      <h3>Encrypt Message</h3>
+      <textarea id="encryptInput" rows="5" placeholder="Enter the message to encrypt"></textarea>
+      <button onclick="encrypt()">Encrypt</button>
+      <div id="encryptOutput"></div>
+    </div>
+    <hr>
+    <div>
+      <h3>Decrypt Message</h3>
+      <textarea id="decryptInput" rows="5" placeholder="Enter the encrypted message"></textarea>
+      <button onclick="decrypt()">Decrypt</button>
+      <div id="decryptOutput"></div>
+    </div>
+  </div>
+
+  <script>
+    const codeDict = {
+      'A': '99ZA', 'B': '98YA', 'C': '97XA', 'D': '96WA', 'E': '95VA',
+      'F': '94UA', 'G': '93TA', 'H': '92SA', 'I': '91RA', 'J': '90QA',
+      'K': '89PA', 'L': '88OA', 'M': '87NA', 'N': '86MA', 'O': '85LA',
+      'P': '84KA', 'Q': '83JA', 'R': '82IA', 'S': '81HA', 'T': '80GA',
+      'U': '79FA', 'V': '78EA', 'W': '77DA', 'X': '76CA', 'Y': '75BA',
+      'Z': '74AA', 'a': '99zx', 'b': '98yx', 'c': '97xx', 'd': '96wx',
+      'e': '95vx', 'f': '94ux', 'g': '93tx', 'h': '92sx', 'i': '91rx',
+      'j': '90qx', 'k': '89px', 'l': '88ox', 'm': '87nx', 'n': '86mx',
+      'o': '85lx', 'p': '84kx', 'q': '83jx', 'r': '82ix', 's': '81hx',
+      't': '80gx', 'u': '79fx', 'v': '78ex', 'w': '77dx', 'x': '76cx'
+    };
+
+    function decryptString(encryptedText, codeDict) {
+      let decryptedText = '';
+      let i = 0;
+      while (i < encryptedText.length) {
+        let found = false;
+        for (let char in codeDict) {
+          const code = codeDict[char];
+          if (encryptedText.substring(i, i + code.length) === code) {
+            decryptedText += char;
+            i += code.length;
+            found = true;
+            break;
+          }
+        }
+        if (!found) {
+          decryptedText += encryptedText[i];
+          i++;
+        }
+      }
+      return decryptedText;
+    }
+
+    function encryptString(text, codeDict) {
+      let encryptedText = '';
+      for (let char of text) {
+        if (char in codeDict) {
+          encryptedText += codeDict[char];
+        } else {
+          encryptedText += char; // If the character is not in the dictionary, keep it unchanged
+        }
+      }
+      return encryptedText;
+    }
+
+    function encrypt() {
+      const message = document.getElementById('encryptInput').value;
+      const encryptedString = encryptString(message, codeDict);
+      document.getElementById('encryptOutput').textContent = `Encrypted Message: ${encryptedString}`;
+    }
+
+    function decrypt() {
+      const encryptedText = document.getElementById('decryptInput').value;
+      const decryptedString = decryptString(encryptedText, codeDict);
+      document.getElementById('decryptOutput').textContent = `Decrypted Message: ${decryptedString}`;
+    }
+  </script>
+</body>
+</html>
