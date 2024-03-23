@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Message Encryption and Decryption</title>
@@ -43,6 +44,7 @@
       <textarea id="encryptInput" rows="5" placeholder="Enter the message to encrypt"></textarea>
       <button onclick="encrypt()">Encrypt</button>
       <div id="encryptOutput"></div>
+      <button id="copyButton" data-clipboard-target="#encryptOutput">Copy</button>
     </div>
     <hr>
     <div>
@@ -50,6 +52,7 @@
       <textarea id="decryptInput" rows="5" placeholder="Enter the encrypted message"></textarea>
       <button onclick="decrypt()">Decrypt</button>
       <div id="decryptOutput"></div>
+      <button id="copyButton" data-clipboard-target="#decryptOutput">Copy</button>
     </div>
   </div>
 
