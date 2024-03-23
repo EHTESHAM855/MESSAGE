@@ -43,16 +43,20 @@
       <h3>Encrypt Message</h3>
       <textarea id="encryptInput" rows="5" placeholder="Enter the message to encrypt"></textarea>
       <button onclick="encrypt()">Encrypt</button>
-      <div id="encryptOutput"></div>
-      <button id="copyButton" data-clipboard-target="#encryptOutput">Copy</button>
+      <div id="encryptOutput">
+         <p id='encryptOutputp'></p>
+      </div>
+<!--       <button id="copyButton" data-clipboard-target="#encryptOutputp">Copy</button> -->
     </div>
     <hr>
     <div>
       <h3>Decrypt Message</h3>
       <textarea id="decryptInput" rows="5" placeholder="Enter the encrypted message"></textarea>
       <button onclick="decrypt()">Decrypt</button>
-      <div id="decryptOutput"></div>
-      <button id="copyButton" data-clipboard-target="#decryptOutput">Copy</button>
+      <div id="decryptOutput">
+         <p id='deccryptOutputp'></p>
+      </div>
+<!--       <button id="copyButton" data-clipboard-target="#decryptOutputp">Copy</button> -->
     </div>
   </div>
 
@@ -107,13 +111,13 @@
     function encrypt() {
       const message = document.getElementById('encryptInput').value;
       const encryptedString = encryptString(message, codeDict);
-      document.getElementById('encryptOutput').textContent = `Encrypted Message: ${encryptedString}`;
+      document.getElementById('encryptOutputp').textContent = `Encrypted Message: ${encryptedString}`;
     }
 
     function decrypt() {
       const encryptedText = document.getElementById('decryptInput').value;
       const decryptedString = decryptString(encryptedText, codeDict);
-      document.getElementById('decryptOutput').textContent = `Decrypted Message: ${decryptedString}`;
+      document.getElementById('decryptOutputp').textContent = `Decrypted Message: ${decryptedString}`;
     }
   </script>
 </body>
